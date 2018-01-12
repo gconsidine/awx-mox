@@ -1,0 +1,14 @@
+{
+  "name": "awx-mox",
+  "version": "0.0.1",
+  "description": "CLI for populating AWX w/ test data",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "bluebird": "^3.5.1",
+    "chalk": "^2.3.0",
+    "commander": "^2.13.0"
+  },
+  "author": "Greg Considine <greg@greg-considine.com>",
+  "license": "MIT"
+}
