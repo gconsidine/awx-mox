@@ -86,6 +86,7 @@ function setRole () {
     })
     .catch(err => {
       log.error(1, '[ ] Role')
+      log.error(2, '   ', err)
     })
 }
 
@@ -108,11 +109,12 @@ function createOrganization () {
         id: api.user.id
       }))
     })
-    .then(() => {
+    .then(res => {
       log.info(1, '[X] Organization')
     })
     .catch(err => {
       log.error(1, '[ ] Organization')
+      log.error(2, '   ', err)
     })
 }
 
@@ -125,7 +127,7 @@ function createCredential () {
     })
     .then(({ data }) => {
       if (data && data.count > 0) {
-        return Promise.resolve()
+        return Promise.resolve();
       }
 
       return api.post('/credentials/', {
@@ -135,10 +137,11 @@ function createCredential () {
         user: api.user.id
       })
     }))
-    .then(() => {
+    .then(res => {
       log.info(1, '[X] Credential')
     })
     .catch(err => {
       log.error(1, '[ ] Credential')
+      log.error(2, '   ', err)
     })
 }
