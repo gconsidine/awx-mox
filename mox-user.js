@@ -35,7 +35,7 @@ switch (action) {
     createCredential()
     break
   case 'organization':
-    createOrganization()
+      createOrganization()
     break
   case 'role':
     setRole()
@@ -79,24 +79,35 @@ function create () {
 function setRole () {
   return api.signIn(user, password)
     .then(() => api.post(`/users/${api.user.id}/roles/`, {
-      id: 4
+      id: defaults.ROLE_ID_SYSTEM_ADMINISTRATOR
     }))
-    .then(() => {
+    .then(res => {
       log.info(1, '[X] Role')
     })
-    .catch(() => {
+    .catch(err => {
       log.error(1, '[ ] Role')
     })
 }
 
 function createOrganization () {
   return api.signIn(user, password)
-    .then(() => api.post('/organizations/', {
-      name: organization
+    .then(() => api.get('/organizations/', {
+      params: {
+        name: organization
+      }
     }))
-    .then(res => api.post(`/organizations/${res.data.id}/users/`, {
-      id: api.user.id
-    }))
+    .then(({ data }) => {
+      if (data && data.count > 0) {
+        return Promise.resolve()
+      }
+
+      return api.post('/organizations/', {
+        name: organization
+      })
+      .then(res => api.post(`/organizations/${res.data.id}/users/`, {
+        id: api.user.id
+      }))
+    })
     .then(() => {
       log.info(1, '[X] Organization')
     })
@@ -107,11 +118,22 @@ function createOrganization () {
 
 function createCredential () {
   return api.signIn(user, password)
-    .then(() => api.post('/credentials/', {
-      name: credential,
-      organization: api.user.related.organizations.id,
-      credential_type: defaults.CREDENTIAL_TYPE,
-      user: api.user.id
+    .then(() => api.get('/credentials/', {
+      params: {
+        name: credential
+      }
+    })
+    .then(({ data }) => {
+      if (data && data.count > 0) {
+        return Promise.resolve()
+      }
+
+      return api.post('/credentials/', {
+        name: credential,
+        organization: api.user.related.organizations.id,
+        credential_type: defaults.CREDENTIAL_TYPE_ID_MACHINE,
+        user: api.user.id
+      })
     }))
     .then(() => {
       log.info(1, '[X] Credential')
