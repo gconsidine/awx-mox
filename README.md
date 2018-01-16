@@ -29,4 +29,6 @@ awx-mox
 
 #### Notes
 
-  Defaults can be overridden by using options. Use `mox --help` for more info.
+  - Individual actions can be performed by running `mox user [action]` or `mox project [action]`
+
+  - Default values can be overridden by using options. Use `mox --help` for more info.
