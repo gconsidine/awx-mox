@@ -13,22 +13,23 @@ awx-mox
 
   `mox user`
 
-  Creates:
-    - user
-    - credential
-    - organization
-    - sets user role
+Creates:
 
-  `mox project`
+- user
+- credential
+- organization
+- sets user role
 
-  Creates:
-    - project
-    - inventory (sm, md, lg, xl)
-    - hosts (all localhost) associated with the inventories and their sizes (5, 100, 500, 1000)
-    - templates (sm-0, sm-1, sm2, md-0, md-1, ... xl-2) where the number represents verbosity
+`mox project`
+
+Creates:
+
+- project
+- inventory (sm, md, lg, xl)
+- hosts (all localhost) associated with the inventories and their sizes (5, 100, 500, 1000)
+- templates (sm-0, sm-1, sm2, md-0, md-1, ... xl-2) where the number represents verbosity
 
 #### Notes
 
-  - Individual actions can be performed by running `mox user [action]` or `mox project [action]`
-
-  - Default values can be overridden by using options. Use `mox --help` for more info.
+- Individual actions can be performed by running `mox user [action]` or `mox project [action]`
+- Default values can be overridden by using options. Use `mox --help` for more info.
