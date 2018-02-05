@@ -25,7 +25,7 @@ const action = program.args[0]
 
 const user = program.user || defaults.USER
 const password = program.password || defaults.PASSWORD
-const logLevel = program.logLevel === null ? defaults.LOG_LEVEL : program.logLevel
+const logLevel = !program.logLevel ? defaults.LOG_LEVEL : program.logLevel
 const project = program.project || defaults.PROJECT
 const inventory = program.inventory || defaults.INVENTORY
 const host = program.host || defaults.HOST
@@ -59,6 +59,7 @@ function createInventories () {
     .then(() => createInventory('md'))
     .then(() => createInventory('lg'))
     .then(() => createInventory('xl'))
+    .then(() => createInventory('xxl'))
 }
 
 function createHosts () {
@@ -66,6 +67,7 @@ function createHosts () {
     .then(() => createHost('md', 100))
     .then(() => createHost('lg', 500))
     .then(() => createHost('xl', 1000))
+    .then(() => createHost('xxl', 10000))
 }
 
 function createTemplates () {
@@ -81,6 +83,9 @@ function createTemplates () {
     .then(() => createTemplate('xl', 0))
     .then(() => createTemplate('xl', 1))
     .then(() => createTemplate('xl', 2))
+    .then(() => createTemplate('xxl', 0))
+    .then(() => createTemplate('xxl', 1))
+    .then(() => createTemplate('xxl', 2))
 }
 
 function createProject () {
